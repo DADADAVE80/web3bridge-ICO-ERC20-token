@@ -12,11 +12,8 @@ how to interact with it.
 - **Decimals**: 18
 - **Total Supply**: Adjustable through minting and burning
 
-## Key Features
-### Token Details
-- Name: TSTToken 
-- Symbol: TST 
-- Decimals: 18 
+## Key Functions
+### Token Supply
 - Total Supply: Get the current total supply using the `totalSupply()` function.
 
 ### Balance and Transfer
