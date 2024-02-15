@@ -85,4 +85,14 @@ contract ICOToken{
         _totalSupply += amount;
         _balances[account] += amount;
     }
+
+    function burn(address account, uint256 amount) external {
+        require(msg.sender != address(0), "ERC20: burn from the zero address");
+
+        uint256 accountBalance = _balances[account];
+        require(accountBalance >= amount, "ERC20: burn amount exceeds balance");
+
+        _balances[account] -= amount;
+        _totalSupply -= amount;
+    }
 }
