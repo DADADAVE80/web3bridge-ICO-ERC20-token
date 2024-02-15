@@ -1,20 +1,20 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-contract ICOToken{
+contract TSTToken{
     mapping(address account => uint256) private _balances;
     mapping(address account => mapping(address spender => uint256)) private _allowances;
 
     address private _owner = msg.sender;
 
-    uint256 private _totalSupply; // 18 decimals
+    uint256 private _totalSupply;
 
     string private _name;
     string private _symbol;
 
     constructor(){
-        _name = "ICOToken";
-        _symbol = "ICO";
+        _name = "TSTToken";
+        _symbol = "TST";
     }
 
     function name() external view returns (string memory){

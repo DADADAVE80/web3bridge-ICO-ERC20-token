@@ -1,6 +1,8 @@
-# Sample Hardhat Project
+# TSTToken
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+This is a simple ERC20 token that is used to simulate an ICO. It is used to demonstrate
+the use of the ERC20 standards and methods to create a token and to deploy it to a
+local network.
 
 Try running some of the following tasks:
 
