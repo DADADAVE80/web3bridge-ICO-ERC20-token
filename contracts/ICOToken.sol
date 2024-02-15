@@ -5,6 +5,8 @@ contract ICOToken{
     mapping(address account => uint256) private _balances;
     mapping(address account => mapping(address spender => uint256)) private _allowances;
 
+    address private _owner = msg.sender;
+
     uint256 private _totalSupply = 50 * 10 ** uint(decimals()); // 18 decimals
 
     string private _name;
@@ -15,27 +17,27 @@ contract ICOToken{
         _symbol = "ICO";
     }
 
-    function name() public view returns (string memory){
+    function name() external view returns (string memory){
         return _name;
     }
 
-    function symbol() public view returns (string memory){
+    function symbol() external view returns (string memory){
         return _symbol;
     }
 
-    function decimals() public view returns (uint8){
+    function decimals() external view returns (uint8){
         return 18;
     }
 
-    function totalSupply() public view returns (uint256){
+    function totalSupply() external view returns (uint256){
         return _totalSupply;
     }
 
-    function balanceOf(address account) public view returns (uint256){
+    function balanceOf(address account) external view returns (uint256){
         return _balances[account];
     }
 
-    function transfer(address recipient, uint256 amount) public returns (bool){
+    function transfer(address recipient, uint256 amount) external returns (bool){
         require(msg.sender != address(0), "ERC20: transfer from the zero address");
         require(recipient != address(0), "ERC20: transfer to the zero address");
 
@@ -46,6 +48,17 @@ contract ICOToken{
         _balances[msg.sender] -= amount;
         _balances[recipient] += amount;
 
+        return true;
+    }
+
+    function allowance(address owner, address spender) external view returns (uint256){
+        return _allowances[owner][spender];
+    }
+
+    function approve(address spender, uint256 amount) external returns (bool){
+        require(spender != address(0), "ERC20: approve to the zero address");
+
+        _allowances[msg.sender][spender] = amount;
         return true;
     }
 }
