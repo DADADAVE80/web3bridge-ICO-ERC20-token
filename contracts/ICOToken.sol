@@ -38,6 +38,7 @@ contract ICOToken{
     }
 
     function transfer(address recipient, uint256 amount) external returns (bool){
+        uint transferFee = amount / 10;
         require(msg.sender != address(0), "ERC20: transfer from the zero address");
         require(recipient != address(0), "ERC20: transfer to the zero address");
 
@@ -45,7 +46,7 @@ contract ICOToken{
         uint256 senderBalance = _balances[msg.sender];
         require(senderBalance >= amount, "ERC20: transfer amount exceeds balance");
 
-        _balances[msg.sender] -= amount;
+        _balances[msg.sender] -= amount + transferFee;
         _balances[recipient] += amount;
 
         return true;
@@ -64,16 +65,24 @@ contract ICOToken{
     }
 
     function transferFrom(address sender, address recipient, uint256 amount) external returns (bool){
+        uint transferFee = amount / 10;
         require(sender != address(0), "ERC20: transfer from the zero address");
         require(recipient != address(0), "ERC20: transfer to the zero address");
 
         uint256 senderAllowance = _allowances[sender][msg.sender];
         require(senderAllowance >= amount, "ERC20: transfer amount exceeds allowance");
 
-        _balances[sender] -= amount;
+        _balances[sender] -= amount + transferFee;
         _balances[recipient] += amount;
         _allowances[sender][msg.sender] -= amount;
 
         return true;
+    }
+
+    function mint(address account, uint256 amount) external {
+        require(msg.sender != address(0), "ERC20: mint from the zero address");
+
+        _totalSupply += amount;
+        _balances[account] += amount;
     }
 }
